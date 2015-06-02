@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_auto_install_confirm">確定</string>
+    <string name="app_auto_install_done">完成</string>
+    <string name="app_auto_install_done_miui">我知道了</string>
+    <string name="app_auto_install_finish_miui">完成</string>
+    <string name="app_auto_install_install">安裝</string>
+    <string name="app_auto_install_lenovo_install_success">安裝成功</string>
+    <string name="app_auto_install_lenovo_install_success_button">完成</string>
+    <string name="app_auto_install_lenovo_le_install_success">安裝成功</string>
+    <string name="app_auto_install_lenovo_no_perm">該應用程式沒有申請任何權限</string>
+    <string name="app_auto_install_lenovo_pass_le_security">已通過樂安全防病毒檢測</string>
+    <string name="app_auto_install_lenovo_perm">該應用程式申請了以下權限：</string>
+    <string name="app_auto_install_next">下一步</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_auto_install_confirm">Ok</string>
+    <string name="app_auto_install_done">Done</string>
+    <string name="app_auto_install_done_miui">OK</string>
+    <string name="app_auto_install_finish_miui">Finish</string>
+    <string name="app_auto_install_install">Install</string>
+    <string name="app_auto_install_lenovo_install_success">Install successful</string>
+    <string name="app_auto_install_lenovo_install_success_button">Complete</string>
+    <string name="app_auto_install_lenovo_le_install_success">Install successfully</string>
+    <string name="app_auto_install_lenovo_no_perm">This application has not applied for any privilege</string>
+    <string name="app_auto_install_lenovo_pass_le_security">No virus detected by Security</string>
+    <string name="app_auto_install_lenovo_perm">Privileges applied for:</string>
+    <string name="app_auto_install_next">Next</string>
+</resources>
