@@ -10,6 +10,7 @@ import org.bunnyblue.apkautoInstaller.ApkAdapter.ViewHolder;
 import org.bunnyblue.apkautoInstaller.utils.ApkFinder;
 import org.bunnyblue.autoinstaller.util.AutoInstallerContext;
 import org.bunnyblue.autoinstaller.util.IApkInstaller;
+import org.bunnyblue.autoinstaller.util.InstallerUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -108,6 +109,21 @@ public class InstallerActivity extends Activity {
 		// 刷新listview和TextView的显示
 		dataChanged();
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!InstallerUtils.isEnableAutoInstall()) {
+			Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
+			startActivityForResult(intent, 0);
+		}
 	}
 
 	// 刷新listview和TextView的显示
