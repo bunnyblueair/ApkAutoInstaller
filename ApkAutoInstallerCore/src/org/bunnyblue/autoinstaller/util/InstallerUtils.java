@@ -53,7 +53,7 @@ public class InstallerUtils {
 		if (accessibilityNodeInfo == null || !accessibilityNodeInfo.isClickable()) {
 			return false;
 		}
-		boolean performAction = accessibilityNodeInfo.performAction(16);
+		boolean performAction = accessibilityNodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
 		InstallerUtils.log(buttonName, performAction);
 		return performAction;
 	}
