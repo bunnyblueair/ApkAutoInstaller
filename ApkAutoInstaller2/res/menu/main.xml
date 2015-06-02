@@ -6,16 +6,16 @@
         android:id="@+id/action_install"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="install"/>
         <item
         android:id="@+id/action_select_all"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="select"/>
             <item
         android:id="@+id/action_unselect_all"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="unselect"/>
 
 </menu>
