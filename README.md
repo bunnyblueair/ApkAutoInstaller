@@ -13,13 +13,15 @@ ApkAutoInstaller ,a  Android  Auto Installer SDK based on 基于AccessibilitySer
 ##  start
  include Core  project  to your  project
 .
-'''
+
+````
 add  code your application such as
 AutoInstallerContext.initApplication(this,
       "org.bunnyblue.apkautoInstaller/org.bunnyblue.autoinstaller.service.AccessibilityServices",
       "org.bunnyblue.apkautoInstaller/org.bunnyblue.apkautoInstaller.InstallerActivity");
 
-'''
+````
+
 ##Sample & Art
 <a href="https://github.com/bunnyblue/ApkAutoInstaller/blob/master/art/ApkAutoInstaller.apk.apk">
   Sample Apk,you can download from here
@@ -27,7 +29,7 @@ AutoInstallerContext.initApplication(this,
 
 ![Open Permission](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/setting.png)
 ![Select Apk](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/step1.png)
-![Install Apk Auto](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/setting.png)
+![Install Apk Auto](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/step2.png)
 ## License
 The MIT License (MIT) Copyright (c) 2015 Bunny Blue,achellies
 
