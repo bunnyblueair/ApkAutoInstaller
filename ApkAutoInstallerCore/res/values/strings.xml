@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ApkAutoInstaller</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="acc_auto_install_service_description">"「AutoInstaller」可以在安装和升级应用时，无需一直盯着手机，AutoInstaller会帮你点击所需的按钮，确保应用顺利安装。
+
+打开服务时，系统会弹出例行的警告。
+
+如果你强制关闭AutoInstaller，或使用内存清理工具关闭AutoInstaller，会造成「AutoInstaller」功能被系统关闭。为保证正常使用，请将AutoInstaller放入清理白名单中。
+
+「AutoInstaller」无需获取手机 Root 权限，支持 Android 4.1 以上系统。如果你的手机不能正常使用，github https://github.com/bunnyblue/ApkAutoInstaller</string>
+    <string name="acc_auto_install_service_name">ApkAutoInstaller</string>
+    <string name="app_auto_install_button">打开</string>
+    <string name="app_auto_install_confirm">确定</string>
+    <string name="app_auto_install_done">完成</string>
+    <string name="app_auto_install_done_miui">我知道了</string>
+    <string name="app_auto_install_finish_miui">完成</string>
+    <string name="app_auto_install_force_turn_off_desc">"这是清理内存功能的一个问题，请把AutoInstaller加
+入清理内存的白名单，或每次正常退出AutoInstaller，
+不适用系统的强制退出。"</string>
+    <string name="app_auto_install_force_turn_off_title">「自动装」在清理内存时被系统关闭</string>
+    <string name="app_auto_install_hint">安装和升级应用，无需盯着手机反复点击。</string>
+    <string name="app_auto_install_install">安装</string>
+    <string name="app_auto_install_lenovo_install_success">安装成功</string>
+    <string name="app_auto_install_lenovo_install_success_button">完成</string>
+    <string name="app_auto_install_lenovo_le_install_success">安装成功</string>
+    <string name="app_auto_install_lenovo_no_perm">该应用没有申请任何权限</string>
+    <string name="app_auto_install_lenovo_pass_le_security">已通过乐安全防病毒检测</string>
+    <string name="app_auto_install_lenovo_perm">该应用申请了以下权限：</string>
+    <string name="app_auto_install_next">下一步</string>
+    <string name="app_auto_install_setting_button">知道了</string>
+    <string name="app_auto_install_setting_desc">开启功能需要你授权确认，本功能不会带来任何风险。</string>
+    <string name="app_auto_install_setting_title">开启「AutoInstaller」</string>
+    <string name="app_auto_install_steps">共帮你按了 %s 次按钮</string>
+    <string name="app_auto_install_tips">正在自动装应用</string>
+    <string name="app_auto_install_title">开启自动装，解决你的一大烦恼</string>
+
+</resources>
