@@ -71,6 +71,7 @@ public class MIUIInstaller extends DefaultInstaller {
 		for (AccessibilityNodeInfo mAccessibilityNodeInfo : InstallerUtils.contains(accessibilityNodeInfo,
 				this.app_auto_install_finish_miui)) {
 			InstallerUtils.performOnclick(mAccessibilityNodeInfo, this.app_auto_install_finish_miui);
+			onInstallEnd();
 		}
 	}
 

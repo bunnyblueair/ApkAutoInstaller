@@ -66,7 +66,21 @@ public class DefaultInstaller implements IInstaller {
 		for (AccessibilityNodeInfo mAccessibilityNodeInfo : InstallerUtils.contains(parentNodeInfo,
 				this.app_auto_install_done)) {
 			InstallerUtils.performOnclick(mAccessibilityNodeInfo, this.app_auto_install_done);
+			onInstallEnd();
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.bunnyblue.autoinstaller.service.installer.IInstaller#onInstallEnd()
+	 */
+	@Override
+	public void onInstallEnd() {
+		if (AutoInstallerContext.getApkInstallMonitor() != null)
+			AutoInstallerContext.getApkInstallMonitor().endInstall("", "");
+
 	}
 
 	protected void showAnim() {

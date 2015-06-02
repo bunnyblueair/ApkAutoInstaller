@@ -32,6 +32,7 @@ public class AutoInstallerContext {
 	private static Context mContext;
 	private static String targetService;
 	private static String targetActivity;
+	private static IApkInstaller mApkInstaller;
 
 	public static void initApplication(Application mApplication, String targetService, String targetActivity) {
 		mContext = mApplication.getApplicationContext();
@@ -51,5 +52,15 @@ public class AutoInstallerContext {
 
 		return targetActivity;
 
+	}
+
+	public static void setApkInstallMonitor(IApkInstaller mApkInstaller) {
+		AutoInstallerContext.mApkInstaller = mApkInstaller;
+
+	}
+
+	public static IApkInstaller getApkInstallMonitor() {
+
+		return mApkInstaller;
 	}
 }

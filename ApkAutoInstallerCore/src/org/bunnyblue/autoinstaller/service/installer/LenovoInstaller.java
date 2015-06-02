@@ -89,6 +89,7 @@ public class LenovoInstaller extends DefaultInstaller {
 					this.app_auto_install_lenovo_install_success_button)) {
 				InstallerUtils.performOnclick(mAccessibilityNodeInfo,
 						this.app_auto_install_lenovo_install_success_button);
+				onInstallEnd();
 			}
 		}
 	}

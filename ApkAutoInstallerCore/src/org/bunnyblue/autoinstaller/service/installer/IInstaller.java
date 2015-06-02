@@ -36,4 +36,6 @@ public interface IInstaller {
 	void onInstall(String installPkgPath, AccessibilityNodeInfo parentNodeInfo,
 			AccessibilityNodeInfo sourceNodeInfo,
 			AccessibilityEvent accessibilityEvent);
+
+	void onInstallEnd();
 }
