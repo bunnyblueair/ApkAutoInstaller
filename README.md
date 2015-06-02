@@ -31,7 +31,7 @@ AutoInstallerContext.initApplication(this,
 ![Select Apk](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/step1.png)
 ![Install Apk Auto](https://github.com/bunnyblue/ApkAutoInstaller/raw/master/art/step2.png)
 ## License
-The MIT License (MIT) Copyright (c) 2015 Bunny Blue,achellies
+The MIT License (MIT) Copyright (c) 2015 Bunny Blue
 
 
 
