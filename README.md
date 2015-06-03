@@ -1,7 +1,7 @@
 # ApkAutoInstaller
 ApkAutoInstaller ,a  Android  Auto Installer SDK based on AccessibilityService<br>The MIT License (MIT) Copyright (c) 2015 Bunny Blue
 
-  <br>Android apk自定安装sdk 基于AccessibilityService。</br>
+  <br>Android apk自动安装sdk 基于AccessibilityService。</br>
 
 
 
