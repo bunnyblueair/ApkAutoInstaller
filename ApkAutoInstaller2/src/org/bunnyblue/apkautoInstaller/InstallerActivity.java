@@ -38,6 +38,7 @@ public class InstallerActivity extends Activity {
 	int apkIndex = 0;
 	ProgressDialog mProgressDialog;
 	ApkPickerReceiver mApkPickerReceiver;
+	String dirPath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,8 @@ public class InstallerActivity extends Activity {
 		mFilter.addAction(ApkPickerReceiver.ACTION_START_PICK);
 		registerReceiver(mApkPickerReceiver, mFilter);
 		mProgressDialog = new ProgressDialog(this);
-		mProgressDialog.setTitle("searching apk");
+		dirPath = getSharedPreferences("config", Context.MODE_PRIVATE).getString("dir", "");
+		mProgressDialog.setTitle("searching apk@" + dirPath);
 		mProgressDialog.setMessage("please  waiting");
 		mProgressDialog.setCanceledOnTouchOutside(false);
 		mProgressDialog.show();
@@ -156,7 +158,7 @@ public class InstallerActivity extends Activity {
 
 			@Override
 			protected Void doInBackground(Void... params) {
-				ApkFinder.findApks(new File("/sdcard/"), apkPaths, getPackageManager());
+				ApkFinder.findApks(new File(dirPath), apkPaths, getPackageManager());
 				for (int i = 0; i < apkPaths.size(); i++) {
 					mApkAdapter.getIsSelected().put(i, false);
 				}
