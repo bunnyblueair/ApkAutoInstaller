@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.bunnyblue.apkautoInstaller.ApkAdapter.ViewHolder;
 import org.bunnyblue.apkautoInstaller.utils.ApkFinder;
+import org.bunnyblue.apkautoInstaller.utils.ApkItem;
 import org.bunnyblue.autoinstaller.util.AutoInstallerContext;
 import org.bunnyblue.autoinstaller.util.IApkInstaller;
 import org.bunnyblue.autoinstaller.util.InstallerUtils;
@@ -26,17 +27,17 @@ import android.widget.ListView;
 public class InstallerActivity extends Activity {
 	ListView mListView;
 	private int checkNum = 0; // 记录选中的条目数量
-	LinkedList<String> apkPaths;
+	LinkedList<ApkItem> apkPaths;
 	ApkAdapter mApkAdapter;
-	String apkPath;
+	ApkItem apkPath;
 	int apkIndex = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		apkPaths = new LinkedList<String>();
-		ApkFinder.findApks(new File("/sdcard/"), apkPaths);
+		apkPaths = new LinkedList<ApkItem>();
+		ApkFinder.findApks(new File("/sdcard/"), apkPaths, getPackageManager());
 		mListView = (ListView) findViewById(R.id.listView);
 		mApkAdapter = new ApkAdapter(apkPaths, this);
 		mListView.setAdapter(mApkAdapter);
@@ -151,13 +152,13 @@ public class InstallerActivity extends Activity {
 		HashMap<Integer, Boolean> apks = ApkAdapter.getIsSelected();
 		Iterator iter = apks.entrySet().iterator();
 
-		final LinkedList<String> apksList = new LinkedList<String>();
+		final LinkedList<ApkItem> apksList = new LinkedList<ApkItem>();
 		while (iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			Integer key = (Integer) entry.getKey();
 			Boolean val = (Boolean) entry.getValue();
 			if (val) {
-				String apkPath = mApkAdapter.getItem(key.intValue());
+				ApkItem apkPath = mApkAdapter.getItem(key.intValue());
 				System.out.println(apkPath);
 				apksList.add(apkPath);
 				// String fileName = "/sdcard/test.apk";
@@ -183,7 +184,7 @@ public class InstallerActivity extends Activity {
 				}
 				apkPath = apksList.get(apkIndex);
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.fromFile(new File(apkPath)),
+				intent.setDataAndType(Uri.fromFile(new File(apkPath.getPath())),
 						"application/vnd.android.package-archive");
 
 				startActivity(intent);
@@ -192,15 +193,7 @@ public class InstallerActivity extends Activity {
 			}
 		};
 		AutoInstallerContext.setApkInstallMonitor(m);
-		m.endInstall("", apkPath);
-		// for (String apkPath : apksList) {
-		//
-		//
-		// // Intent intent = new Intent(Intent.ACTION_VIEW);
-		// // intent.setDataAndType(Uri.fromFile(new File(apkPath)),
-		// // "application/vnd.android.package-archive");
-		// //
-		// // startActivity(intent);
-		// }
+		m.endInstall("", "");
+
 	}
 }

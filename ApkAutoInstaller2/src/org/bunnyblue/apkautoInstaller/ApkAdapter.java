@@ -6,12 +6,15 @@ package org.bunnyblue.apkautoInstaller;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.bunnyblue.apkautoInstaller.utils.ApkItem;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -21,7 +24,7 @@ import android.widget.TextView;
 
 public class ApkAdapter extends BaseAdapter {
 	// 填充数据的list
-	private LinkedList<String> list;
+	private LinkedList<ApkItem> list;
 	// 用来控制CheckBox的选中状况
 	private static HashMap<Integer, Boolean> isSelected;
 	// 上下文
@@ -30,7 +33,7 @@ public class ApkAdapter extends BaseAdapter {
 	private LayoutInflater inflater = null;
 
 	// 构造器
-	public ApkAdapter(LinkedList<String> list, Context context) {
+	public ApkAdapter(LinkedList<ApkItem> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
@@ -52,7 +55,7 @@ public class ApkAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public String getItem(int position) {
+	public ApkItem getItem(int position) {
 		return list.get(position);
 	}
 
@@ -69,8 +72,15 @@ public class ApkAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			// 导入布局并赋值给convertview
 			convertView = inflater.inflate(R.layout.item_apk, null);
-			holder.apkTextView = (TextView) convertView.findViewById(R.id.apkName);
+			holder.apkName = (TextView) convertView.findViewById(R.id.apkName);
 			holder.apkCheckBox = (CheckBox) convertView.findViewById(R.id.apkSelect);
+
+			holder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
+			holder.tvPah = (TextView) convertView.findViewById(R.id.tvPah);
+			holder.tvPkgName = (TextView) convertView.findViewById(R.id.tvPkgName);
+			holder.tvVersionCode = (TextView) convertView.findViewById(R.id.tvVersionCode);
+			holder.tvVersionName = (TextView) convertView.findViewById(R.id.tvVersionName);
+
 			// 为view设置标签
 			convertView.setTag(holder);
 		} else {
@@ -78,8 +88,13 @@ public class ApkAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.apkTextView.setText(list.get(position));
-
+		holder.apkName.setText("名称 " + list.get(position).getAppName());
+		holder.imageView.setImageDrawable(list.get(position).getIcon());
+		ApkItem mApkItem = list.get(position);
+		holder.tvPah.setText("路径 " + mApkItem.getPath());
+		holder.tvPkgName.setText("包名 " + mApkItem.getPackageName());
+		holder.tvVersionCode.setText(mApkItem.getVersionCode() + "");
+		holder.tvVersionName.setText("版本 " + mApkItem.getVersionName());
 		holder.apkCheckBox.setChecked(getIsSelected().get(position));
 		return convertView;
 	}
@@ -93,7 +108,13 @@ public class ApkAdapter extends BaseAdapter {
 	}
 
 	static class ViewHolder {
-		TextView apkTextView;
+		TextView apkName;
 		CheckBox apkCheckBox;
+		TextView tvPah;
+		TextView tvPkgName;
+		TextView tvVersionCode;
+		TextView tvVersionName;
+		ImageView imageView;
+
 	}
 }
