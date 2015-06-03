@@ -6,6 +6,9 @@ package org.bunnyblue.apkautoInstaller.utils;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.bunnyblue.autoinstaller.util.AutoInstallerContext;
+
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -25,10 +28,13 @@ public class ApkFinder {
 				findApks(f, apkPaths, pm); // 如果是文件夹，重新遍历
 			} else { // 如果是文件 就打印文件的路径
 				if (f.getAbsolutePath().endsWith(".apk")) {
+					Intent mIntent = new Intent("ACTION_ApkPickerReceiver_PICKED");
+					mIntent.putExtra("path", f.getAbsolutePath());
+					AutoInstallerContext.getContext().sendBroadcast(mIntent);
 					ApkItem apkItem = new ApkItem(f.getAbsolutePath(), pm);
 
 					pureItem(apkPaths, apkItem, pm);
-					;
+
 					// apkPaths.add(apkItem);
 				}
 			}

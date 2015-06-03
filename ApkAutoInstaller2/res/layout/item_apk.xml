@@ -29,12 +29,14 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:src="@drawable/ic_launcher" />
 
         <TextView
@@ -42,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-          
             android:layout_toRightOf="@+id/imageView"
+            android:padding="5dp"
             android:text="versionName" />
 
         <TextView
@@ -51,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/imageView"
-           
             android:layout_toRightOf="@+id/imageView"
+            android:padding="5dp"
             android:text="versionCode" />
     </RelativeLayout>
 
@@ -60,12 +62,14 @@
         android:id="@+id/tvPkgName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:text="packageName" />
 
     <TextView
         android:id="@+id/tvPah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:text="路径" />
 
 </LinearLayout>

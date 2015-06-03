@@ -26,7 +26,7 @@ public class ApkAdapter extends BaseAdapter {
 	// 填充数据的list
 	private LinkedList<ApkItem> list;
 	// 用来控制CheckBox的选中状况
-	private static HashMap<Integer, Boolean> isSelected;
+	private HashMap<Integer, Boolean> isSelected = new HashMap<Integer, Boolean>();;
 	// 上下文
 	private Context context;
 	// 用来导入布局
@@ -37,7 +37,7 @@ public class ApkAdapter extends BaseAdapter {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
-		isSelected = new HashMap<Integer, Boolean>();
+
 		// 初始化数据
 		initData();
 	}
@@ -88,23 +88,23 @@ public class ApkAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.apkName.setText("名称 " + list.get(position).getAppName());
+		holder.apkName.setText(list.get(position).getAppName());
 		holder.imageView.setImageDrawable(list.get(position).getIcon());
 		ApkItem mApkItem = list.get(position);
-		holder.tvPah.setText("路径 " + mApkItem.getPath());
-		holder.tvPkgName.setText("包名 " + mApkItem.getPackageName());
+		holder.tvPah.setText(mApkItem.getPath());
+		holder.tvPkgName.setText(mApkItem.getPackageName());
 		holder.tvVersionCode.setText(mApkItem.getVersionCode() + "");
-		holder.tvVersionName.setText("版本 " + mApkItem.getVersionName());
+		holder.tvVersionName.setText(mApkItem.getVersionName());
 		holder.apkCheckBox.setChecked(getIsSelected().get(position));
 		return convertView;
 	}
 
-	public static HashMap<Integer, Boolean> getIsSelected() {
+	public HashMap<Integer, Boolean> getIsSelected() {
 		return isSelected;
 	}
 
-	public static void setIsSelected(HashMap<Integer, Boolean> isSelected) {
-		ApkAdapter.isSelected = isSelected;
+	public void setIsSelected(HashMap<Integer, Boolean> isSelected) {
+		this.isSelected = isSelected;
 	}
 
 	static class ViewHolder {

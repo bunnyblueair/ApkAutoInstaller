@@ -14,8 +14,13 @@ import org.bunnyblue.autoinstaller.util.IApkInstaller;
 import org.bunnyblue.autoinstaller.util.InstallerUtils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,17 +36,31 @@ public class InstallerActivity extends Activity {
 	ApkAdapter mApkAdapter;
 	ApkItem apkPath;
 	int apkIndex = 0;
+	ProgressDialog mProgressDialog;
+	ApkPickerReceiver mApkPickerReceiver;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		apkPaths = new LinkedList<ApkItem>();
-		ApkFinder.findApks(new File("/sdcard/"), apkPaths, getPackageManager());
+		mApkPickerReceiver = new ApkPickerReceiver();
+		IntentFilter mFilter = new IntentFilter();
+		mFilter.addAction(ApkPickerReceiver.ACTION_END_PICK);
+		mFilter.addAction(ApkPickerReceiver.ACTION_PICKED);
+		mFilter.addAction(ApkPickerReceiver.ACTION_START_PICK);
+		registerReceiver(mApkPickerReceiver, mFilter);
+		mProgressDialog = new ProgressDialog(this);
+		mProgressDialog.setTitle("searching apk");
+		mProgressDialog.setMessage("please  waiting");
+		mProgressDialog.setCanceledOnTouchOutside(false);
+		mProgressDialog.show();
 		mListView = (ListView) findViewById(R.id.listView);
 		mApkAdapter = new ApkAdapter(apkPaths, this);
 		mListView.setAdapter(mApkAdapter);
+
 		initListviewClick();
+
 	}
 
 	@Override
@@ -84,7 +103,7 @@ public class InstallerActivity extends Activity {
 				// 改变CheckBox的状态
 				holder.apkCheckBox.toggle();
 				// 将CheckBox的选中状况记录下来
-				ApkAdapter.getIsSelected().put(arg2, holder.apkCheckBox.isChecked());
+				mApkAdapter.getIsSelected().put(arg2, holder.apkCheckBox.isChecked());
 				// 调整选定条目
 				if (holder.apkCheckBox.isChecked() == true) {
 					checkNum++;
@@ -103,7 +122,7 @@ public class InstallerActivity extends Activity {
 
 		// 遍历list的长度，将MyAdapter中的map值全部设为true
 		for (int i = 0; i < apkPaths.size(); i++) {
-			ApkAdapter.getIsSelected().put(i, true);
+			mApkAdapter.getIsSelected().put(i, false);
 		}
 		// 数量设为list的长度
 		checkNum = apkPaths.size();
@@ -125,6 +144,41 @@ public class InstallerActivity extends Activity {
 			Intent intent = new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS);
 			startActivityForResult(intent, 0);
 		}
+
+		if (apkPaths.size() == 0) {
+			genAPks();
+		}
+
+	}
+
+	private void genAPks() {
+		AsyncTask<Void, Integer, Void> asyncTask = new AsyncTask<Void, Integer, Void>() {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				ApkFinder.findApks(new File("/sdcard/"), apkPaths, getPackageManager());
+				for (int i = 0; i < apkPaths.size(); i++) {
+					mApkAdapter.getIsSelected().put(i, false);
+				}
+				Intent mIntent = new Intent(ApkPickerReceiver.ACTION_END_PICK);
+				sendBroadcast(mIntent);
+				return null;
+			}
+
+		};
+		asyncTask.execute(new Void[] {});
+		// Thread thread = new Thread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// ApkFinder.findApks(new File("/sdcard/"), apkPaths,
+		// getPackageManager());
+		// Intent mIntent = new Intent(ApkPickerReceiver.ACTION_END_PICK);
+		// sendBroadcast(mIntent);
+		// }
+		// });
+		// thread.start();
+
 	}
 
 	// 刷新listview和TextView的显示
@@ -139,7 +193,7 @@ public class InstallerActivity extends Activity {
 
 		// 遍历list的长度，将MyAdapter中的map值全部设为true
 		for (int i = 0; i < apkPaths.size(); i++) {
-			ApkAdapter.getIsSelected().put(i, true);
+			mApkAdapter.getIsSelected().put(i, true);
 		}
 		// 数量设为list的长度
 		checkNum = apkPaths.size();
@@ -149,7 +203,7 @@ public class InstallerActivity extends Activity {
 	}
 
 	private void installALl() {
-		HashMap<Integer, Boolean> apks = ApkAdapter.getIsSelected();
+		HashMap<Integer, Boolean> apks = mApkAdapter.getIsSelected();
 		Iterator iter = apks.entrySet().iterator();
 
 		final LinkedList<ApkItem> apksList = new LinkedList<ApkItem>();
@@ -196,4 +250,36 @@ public class InstallerActivity extends Activity {
 		m.endInstall("", "");
 
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onDestroy()
+	 */
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(mApkPickerReceiver);
+	}
+
+	class ApkPickerReceiver extends BroadcastReceiver {
+		public static final String ACTION_START_PICK = "ACTION_ApkPickerReceiver_START_PICK";
+		public static final String ACTION_PICKED = "ACTION_ApkPickerReceiver_PICKED";
+		public static final String ACTION_END_PICK = "ACTION_ApkPickerReceiver_END";
+
+		public ApkPickerReceiver() {
+		}
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals(ACTION_PICKED)) {
+				mProgressDialog.setMessage("process " + intent.getStringExtra("path"));
+			} else if (intent.getAction().equals(ACTION_END_PICK)) {
+				mProgressDialog.dismiss();
+				dataChanged();
+			}
+		}
+	}
+
 }
