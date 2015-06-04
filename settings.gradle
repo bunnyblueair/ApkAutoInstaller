@@ -1,0 +1,2 @@
+include ':ApkAutoInstaller2'
+include ':ApkAutoInstallerCore'
