@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.bunnyblue.apkautoInstaller;
 
@@ -23,26 +23,26 @@ import android.widget.TextView;
  */
 
 public class ApkAdapter extends BaseAdapter {
-	// 填充数据的list
+
 	private LinkedList<ApkItem> list;
-	// 用来控制CheckBox的选中状况
+
 	private HashMap<Integer, Boolean> isSelected = new HashMap<Integer, Boolean>();;
-	// 上下文
+
 	private Context context;
-	// 用来导入布局
+
 	private LayoutInflater inflater = null;
 
-	// 构造器
+
 	public ApkAdapter(LinkedList<ApkItem> list, Context context) {
 		this.context = context;
 		this.list = list;
 		inflater = LayoutInflater.from(context);
 
-		// 初始化数据
+
 		initData();
 	}
 
-	// 初始化isSelected的数据
+
 	private void initData() {
 		for (int i = 0; i < list.size(); i++) {
 			getIsSelected().put(i, false);
@@ -81,10 +81,10 @@ public class ApkAdapter extends BaseAdapter {
 			holder.tvVersionCode = (TextView) convertView.findViewById(R.id.tvVersionCode);
 			holder.tvVersionName = (TextView) convertView.findViewById(R.id.tvVersionName);
 
-			// 为view设置标签
+
 			convertView.setTag(holder);
 		} else {
-			// 取出holder
+		
 			holder = (ViewHolder) convertView.getTag();
 		}
 
