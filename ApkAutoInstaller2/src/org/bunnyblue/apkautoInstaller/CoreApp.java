@@ -24,7 +24,7 @@ public class CoreApp extends Application {
 		super.onCreate();
 		AutoInstallerContext.initApplication(this,
 				"org.bunnyblue.apkautoInstaller/org.bunnyblue.autoinstaller.service.AccessibilityServices",
-				"org.bunnyblue.apkautoInstaller/org.bunnyblue.apkautoInstaller.InstallerActivity");
+				"org.bunnyblue.apkautoInstaller/org.bunnyblue.apkautoInstaller.BootActivity");
 	}
 
 }
