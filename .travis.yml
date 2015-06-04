@@ -17,6 +17,9 @@ before_script:
   - adb shell input keyevent 82 &
 
 script:
-  - ./gradlew connectedAndroidTest
+  - ./gradlew clean connectedAndroidTest
   - ./gradlew assembleDebug
   - ./gradlew installDebug
+cache:
+  directories:
+    - $HOME/.gradle
